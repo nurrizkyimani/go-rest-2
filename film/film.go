@@ -14,11 +14,12 @@ type Film struct {
 	Title  string `json:"title"`
 	Director string `json:"director"` 
 	createdAt time.Time 
+	Rating int `json:"rating"`
 
 }
 
 func GetFilms(c *fiber.Ctx) {
-	c.Send("Send Films this is awesome")
+	// c.Send("Send Films this is awesome")
 	db := database.DBConn
 	var films []Film
 	db.Find(&films)
@@ -34,7 +35,17 @@ func GetFilm(c *fiber.Ctx) {
 }
 
 func NewFilm(c *fiber.Ctx) {
-	c.Send("Post new Film")
+	db := database.DBConn
+
+
+	film := new(Film)
+	if err := c.BodyParser(film); err != nil {
+		c.Status(503).Send(err)
+		return 
+	}
+
+	db.Create(&film)
+	c.JSON(film)
 }
 
 func UpdateFilm(c *fiber.Ctx) {
@@ -42,5 +53,20 @@ func UpdateFilm(c *fiber.Ctx) {
 }
 
 func DelFilm(c *fiber.Ctx) {
-	c.Send("Send Films")
+	id := c.Params("id")
+	db := database.DBConn
+
+	var film Film
+	db.First(&film, id)
+
+	if film.Title == "" {
+		c.Status(500).Send("No film on given id")
+		return
+	}
+
+	db.Delete(&film)
+
+	c.Send("Successfluu")
+
+
 }

@@ -35,7 +35,7 @@ func initDatabase(){
 
 		fmt.Println("Connection opened database")
 
-		// database.DBConn.AutoMigrate(&film.Film{})
+		// database.DBConn.AutoMigrate(&film.Film{})/a
 
 		fmt.Println("database migrated")
 
@@ -59,8 +59,6 @@ func setupRoutes(app *fiber.App){
 
 func main() {
 	app := fiber.New()
-
-
 	initDatabase()
 	setupRoutes(app)
 
