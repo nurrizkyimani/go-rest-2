@@ -9,7 +9,9 @@ require (
 	github.com/gofiber/fiber v1.13.3
 	github.com/jinzhu/gorm v1.9.15
 	github.com/joho/godotenv v1.3.0
+	github.com/lib/pq v1.8.0
 	github.com/mattn/go-shellwords v1.0.10 // indirect
+	github.com/satori/go.uuid v1.2.0
 	github.com/silenceper/gowatch v0.0.0-20200624073703-8e473a9db258 // indirect
 	gopkg.in/urfave/cli.v1 v1.20.0 // indirect
 )
